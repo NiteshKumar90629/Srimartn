@@ -1,0 +1,259 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    font-family: 'Roboto', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.screen-content {
+    display: none;
+    padding: 16px;
+    padding-bottom: 72px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.screen-content.active {
+    display: block;
+}
+
+/* Material Design Enhancements */
+.mdl-button {
+    border-radius: 24px;
+    text-transform: none;
+    font-weight: 500;
+    padding: 0 24px;
+    height: 48px;
+    transition: all 0.3s ease;
+}
+
+.mdl-button:active {
+    transform: scale(0.98);
+}
+
+.mdl-textfield {
+    width: 100%;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    padding: 8px 0;
+    z-index: 1000;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+}
+
+.bottom-nav button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.bottom-nav button.active {
+    opacity: 1;
+    color: #6200ee;
+}
+
+.bottom-nav button i {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.bottom-nav button span {
+    font-size: 12px;
+}
+
+/* User and Order Cards */
+.user-card, .order-card {
+    width: 100%;
+    max-width: 600px;
+    margin: 16px auto;
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.user-card:active, .order-card:active {
+    transform: scale(0.98);
+}
+
+/* Add Food Form */
+.add-food-form {
+    max-width: 500px;
+    margin: 16px auto;
+    padding: 24px;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.add-food-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.add-food-form h3 {
+    margin-top: 0;
+    color: #6200ee;
+}
+
+/* Search Bar */
+.search-bar {
+    padding: 16px;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 0 0 12px 12px;
+}
+
+/* Order Status */
+.order-status {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.status-pending {
+    background-color: #fb8c00;
+}
+
+.status-processing {
+    background-color: #2196f3;
+}
+
+.status-completed {
+    background-color: #4caf50;
+}
+
+.status-cancelled {
+    background-color: #f44336;
+}
+
+/* Food Grid */
+#search-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    padding: 16px;
+}
+
+.food-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.food-card:active {
+    transform: scale(0.98);
+}
+
+.food-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+
+/* Stats Cards */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    background: white;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.stat-card .value {
+    font-size: 24px;
+    font-weight: 500;
+    color: #6200ee;
+}
+
+.stat-card .label {
+    font-size: 14px;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 360px) {
+    #search-results {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+    
+    .bottom-nav button i {
+        font-size: 20px;
+    }
+    
+    .bottom-nav button span {
+        font-size: 11px;
+    }
+    
+    .add-food-form {
+        margin: 16px;
+        padding: 16px;
+    }
+}
+
+@media (min-width: 600px) {
+    .screen-content {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    #search-results {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .bottom-nav {
+        width: 100%;
+        max-width: 600px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 24px 24px 0 0;
+    }
+}
+
+/* Loading States */
+.loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}

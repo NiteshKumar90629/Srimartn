@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Auth Screen -->
+        <div id="auth-screen" class="screen active">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <img src="file:///C:/Users/win10/Pictures/Screenshot_2025-01-18-15-44-20-34~2-fotor-20250118154932-fotor-bg-remover-2025011815523%20(1).png" alt="Logo" class="auth-logo">
+                    <h1>Admin Dashboard</h1>
+                    <p>Manage your food delivery business</p>
+                </div>
+                <form id="auth-form">
+                    <div class="input-field">
+                        <span class="material-icons-round">email</span>
+                        <input type="email" id="email" placeholder=" " required>
+                        <label for="email">Admin Email</label>
+                    </div>
+                    <div class="input-field">
+                        <span class="material-icons-round">lock</span>
+                        <input type="password" id="password" placeholder=" " required>
+                        <label for="password">Password</label>
+                    </div>
+                    <button type="submit" class="button button-primary">
+                        Login
+                        <span class="material-icons-round">login</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main App -->
+        <div id="main-app" class="screen">
+            <!-- Top App Bar -->
+            <div class="top-app-bar">
+                <h2 class="page-title">Admin Dashboard</h2>
+                <button class="icon-button" onclick="handleLogout()">
+                    <span class="material-icons-round">logout</span>
+                </button>
+            </div>
+
+            <!-- Content Container -->
+            <div class="content-container">
+                <!-- Dashboard Screen -->
+                <div id="dashboard-screen" class="screen-content active">
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <span class="material-icons-round">shopping_cart</span>
+                            <div class="stat-content">
+                                <h3>Total Orders</h3>
+                                <p id="total-orders">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="material-icons-round">pending</span>
+                            <div class="stat-content">
+                                <h3>Pending Orders</h3>
+                                <p id="pending-orders">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="material-icons-round">restaurant</span>
+                            <div class="stat-content">
+                                <h3>Total Items</h3>
+                                <p id="total-items">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="material-icons-round">people</span>
+                            <div class="stat-content">
+                                <h3>Total Users</h3>
+                                <p id="total-users">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orders Screen -->
+                <div id="orders-screen" class="screen-content">
+                    <div class="section-title">
+                        <h3>All Orders</h3>
+                        <div class="order-filters">
+                            <button class="chip active" onclick="filterOrders('all')">All</button>
+                            <button class="chip" onclick="filterOrders('pending')">Pending</button>
+                            <button class="chip" onclick="filterOrders('completed')">Completed</button>
+                        </div>
+                    </div>
+                    <div class="orders-list" id="orders-container"></div>
+                </div>
+
+                <!-- Menu Screen -->
+                <div id="menu-screen" class="screen-content">
+                    <div class="section-title">
+                        <h3>Menu Items</h3>
+                        <button class="button button-primary" onclick="showAddItemModal()">
+                            <span class="material-icons-round">add</span>
+                            Add Item
+                        </button>
+                    </div>
+                    <div class="search-bar">
+                        <span class="material-icons-round">search</span>
+                        <input type="text" id="menu-search-input" placeholder="Search menu items...">
+                    </div>
+                    <div class="food-grid" id="menu-container"></div>
+                </div>
+
+                <!-- Users Screen -->
+                <div id="users-screen" class="screen-content">
+                    <div class="section-title">
+                        <h3>Registered Users</h3>
+                        <div class="search-bar">
+                            <span class="material-icons-round">search</span>
+                            <input type="text" id="user-search" placeholder="Search users...">
+                        </div>
+                    </div>
+                    <div class="users-grid" id="users-container">
+                        <!-- User cards will be dynamically added here -->
+                    </div>
+                </div>
+
+                <!-- Users Screen -->
+                <div id="users-screen" class="screen-content">
+                    <div class="section-title">
+                        <h3>Users</h3>
+                    </div>
+                    <div class="users-list" id="users-container"></div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <nav class="bottom-nav">
+                <button class="nav-item active" onclick="showScreen('dashboard')">
+                    <span class="material-icons-round">dashboard</span>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-item" onclick="showScreen('orders')">
+                    <span class="material-icons-round">receipt_long</span>
+                    <span>Orders</span>
+                </button>
+                <button class="nav-item" onclick="showScreen('menu')">
+                    <span class="material-icons-round">restaurant_menu</span>
+                    <span>Menu</span>
+                </button>
+                <button class="nav-item" onclick="showScreen('users')">
+                    <span class="material-icons-round">people</span>
+                    <span>Users</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Add Item Modal -->
+        <div class="modal" id="add-item-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Add Menu Item</h4>
+                    <button class="icon-button" onclick="closeAddItemModal()">
+                        <span class="material-icons-round">close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="add-item-form">
+                        <div class="input-field">
+                            <span class="material-icons-round">restaurant</span>
+                            <input type="text" id="item-name" placeholder=" " required>
+                            <label for="item-name">Item Name</label>
+                        </div>
+                        <div class="input-field">
+                            <span class="material-icons-round">description</span>
+                            <textarea id="item-description" placeholder=" " required rows="3"></textarea>
+                            <label for="item-description">Item Description</label>
+                        </div>
+                        <div class="input-field">
+                            <span class="material-icons-round">currency_rupee</span>
+                            <input type="number" id="item-price" min="1" step="1" placeholder=" " required>
+                            <label for="item-price">Price (₹)</label>
+                        </div>
+                        <div class="input-field">
+                            <span class="material-icons-round">image</span>
+                            <input type="text" id="item-image" placeholder=" " required>
+                            <label for="item-image">Image URL</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="button button-secondary" onclick="closeAddItemModal()">Cancel</button>
+                    <button class="button button-primary" onclick="addMenuItem()">
+                        <span class="material-icons-round">add</span>
+                        Add Item
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
